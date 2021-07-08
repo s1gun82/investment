@@ -27,15 +27,15 @@ public class ProductVO {
     @Column(nullable = false)
     private Long total_investing_amount;
 
-    @Column(nullable = false)
-    private Long current_investing_amount;
+    //@Column(nullable = false)
+    //private Long current_investing_amount;
 
-    @Column
-    private int investorCount;
+    //@Column
+    //private int investorCount;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ProductStatus productStatus;
+    //@Column(nullable = false)
+    //@Enumerated(EnumType.STRING)
+    //private ProductStatus productStatus;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false, updatable = false)

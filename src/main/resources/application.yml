@@ -5,12 +5,11 @@ spring:
   application:
     name: investment
   datasource:
-    url: jdbc:h2:mem:investment
-    username: kakaopay
-    password:
-    driverClassName: org.h2.Driver
+    url: jdbc:mysql://192.168.0.103:3306/investment?characterEncoding=UTF-8&serverTimezone=UTC
+    username: admin
+    password: admin
+    driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
+    database: mysql
     show-sql: true
-  h2:
-    console:
-      enabled: true
+
