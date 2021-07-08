@@ -23,7 +23,7 @@ public class User {
     @Id
     @ManyToOne
     @JoinColumn(name ="PRODUCT_ID")
-    private Product product;
+    private ProductVO product;
 
     @Column(nullable = false)
     private Long investment_amount;

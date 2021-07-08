@@ -13,7 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-public class Product {
+@Table(name="PRODUCT")
+public class ProductVO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
