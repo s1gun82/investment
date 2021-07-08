@@ -1,0 +1,16 @@
+server:
+  port: 17001
+
+spring:
+  application:
+    name: investment
+  datasource:
+    url: jdbc:h2:mem:investment
+    username: kakaopay
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
