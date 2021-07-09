@@ -1,5 +1,5 @@
 package com.kakaopay.investment.type;
 
 public enum ProductStatus {
-    IN_PROGRESS, SOLD_OUT
+    모집중, 모집완료
 }

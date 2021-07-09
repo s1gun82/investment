@@ -16,4 +16,5 @@ public interface ProductRepository extends PagingAndSortingRepository<ProductVO,
             "WHERE p.started_at <?1 and p.finished_at >?1 ")
     List<ProductVO> findAllByCurrentDate(Date currentDateTime);
 
+
 }

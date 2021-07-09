@@ -14,32 +14,27 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@IdClass( value = User.PK.class )
-public class User {
+@Table(name="USER_ORDER")
+public class UserOrderVO implements Serializable {
 
     @Id
+    @Column(name ="USER_ID")
     private Long user_id;
 
-    @Id
-    @ManyToOne
+    @ManyToOne(targetEntity=ProductVO.class, fetch = FetchType.EAGER)
     @JoinColumn(name ="PRODUCT_ID")
     private ProductVO product;
 
     @Column(nullable = false)
-    private Long investment_amount;
+    private Long investment_amt;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @Temporal( TemporalType.TIMESTAMP )
     @Column(nullable = false, updatable = false)
     private Date investment_date;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class PK implements Serializable {
-
-        private static final long serialVersionUID = 1452817308876549380L;
-
-        private long user_id;
-        private int product;
+    @PrePersist
+    protected void onPersist() {
+        this.investment_date = new Date();
     }
+
 }

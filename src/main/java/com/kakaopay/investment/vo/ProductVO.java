@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -14,28 +15,18 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name="PRODUCT")
-public class ProductVO {
+public class ProductVO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRODUCT_ID")
-    private int product_id;
+    private Integer product_id;
 
     @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
     private Long total_investing_amount;
-
-    //@Column(nullable = false)
-    //private Long current_investing_amount;
-
-    //@Column
-    //private int investorCount;
-
-    //@Column(nullable = false)
-    //@Enumerated(EnumType.STRING)
-    //private ProductStatus productStatus;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false, updatable = false)
@@ -44,6 +35,16 @@ public class ProductVO {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false, updatable = false)
     private Date finished_at;
+
+    @Column(nullable = false)
+    private Long investing_amt;
+
+    @Column(nullable = false)
+    private int investor_cnt;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProductStatus product_status;
 
 
 

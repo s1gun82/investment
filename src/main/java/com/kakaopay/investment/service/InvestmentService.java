@@ -6,5 +6,9 @@ import java.util.List;
 
 public interface InvestmentService {
 
-    ResponseData getAllList();
+    ResponseData getAllProductList();
+
+    ResponseData getMyOrderList(Long userId);
+
+    ResponseData placeOrder(Long userId, Integer product_id, long investment_amt);
 }
