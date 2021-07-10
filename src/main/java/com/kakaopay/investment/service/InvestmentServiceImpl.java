@@ -10,6 +10,7 @@ import com.kakaopay.investment.type.ErrorCodeType;
 import com.kakaopay.investment.type.ProductStatus;
 import com.kakaopay.investment.vo.ProductVO;
 import com.kakaopay.investment.vo.ResponseData;
+import com.kakaopay.investment.dto.UserOrderDTO;
 import com.kakaopay.investment.vo.UserOrderVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class InvestmentServiceImpl implements InvestmentService {
     public ResponseData getMyOrderList(Long userId) {
 
         ResponseData response = new ResponseData();
-        List<UserOrderVO> userOrderList = userOrderRepository.findByUserId(userId);
+        List<UserOrderDTO> userOrderList = userOrderRepository.findByMyOrderList(userId);
 
         response.put("MyOrderList", userOrderList);
         return response;
