@@ -57,8 +57,8 @@ class InvestmentApplicationTests {
     }
 
     @Test
-    @DisplayName("투자하기")
-    public void placeOrder() throws Exception {
+    @DisplayName("투자하기_정상 케이스")
+    public void placeOrderNormal() throws Exception {
 
         MultiValueMap<String, String> reqParams = new LinkedMultiValueMap<>();
         reqParams.add("product_id", "2");
@@ -68,6 +68,83 @@ class InvestmentApplicationTests {
                 .contentType("application/json")
                 .params(reqParams)
                 .header("X-USER-ID", "1111111"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String r = result.getResponse().toString();
+        log.info("result:{}", r);
+    }
+
+    @Test
+    @DisplayName("투자하기_헤더에 사용자 ID없는 경우")
+    public void placeOrderWithoutUserID() throws Exception {
+
+        MultiValueMap<String, String> reqParams = new LinkedMultiValueMap<>();
+        reqParams.add("product_id", "2");
+        reqParams.add("investment_amt", "10000000000");
+
+        MvcResult result = mvc.perform(post("/order")
+                .contentType("application/json")
+                .params(reqParams))
+             //   .header("X-USER-ID", "777777"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String r = result.getResponse().toString();
+        log.info("result:{}", r);
+    }
+
+    @Test
+    @DisplayName("투자하기_금액이 큰 투자건")
+    public void placeOrderLargeAmount() throws Exception {
+
+        MultiValueMap<String, String> reqParams = new LinkedMultiValueMap<>();
+        reqParams.add("product_id", "2");
+        reqParams.add("investment_amt", "10000000000");
+
+        MvcResult result = mvc.perform(post("/order")
+                .contentType("application/json")
+                .params(reqParams)
+                .header("X-USER-ID", "777777"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String r = result.getResponse().toString();
+        log.info("result:{}", r);
+    }
+
+
+    @Test
+    @DisplayName("투자하기_이미 투자한 상품 재투자 하는 경우")
+    public void placeOrderWithSameProduct() throws Exception {
+
+        MultiValueMap<String, String> reqParams = new LinkedMultiValueMap<>();
+        reqParams.add("product_id", "2");
+        reqParams.add("investment_amt", "1000000");
+
+        MvcResult result = mvc.perform(post("/order")
+                .contentType("application/json")
+                .params(reqParams)
+                .header("X-USER-ID", "12345"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String r = result.getResponse().toString();
+        log.info("result:{}", r);
+    }
+
+    @Test
+    @DisplayName("투자하기_유효한 상품이 아닌 경우")
+    public void placeOrderWithInvalidProduct() throws Exception {
+
+        MultiValueMap<String, String> reqParams = new LinkedMultiValueMap<>();
+        reqParams.add("product_id", "1");
+        reqParams.add("investment_amt", "1000000");
+
+        MvcResult result = mvc.perform(post("/order")
+                .contentType("application/json")
+                .params(reqParams)
+                .header("X-USER-ID", "777777"))
                 .andExpect(status().isOk())
                 .andReturn();
 
